@@ -79,7 +79,6 @@ input:focus::placeholder{
 .link{
     opacity: 0;
     text-align: center;
-    text-transform: capitalize;
     color: rgba(255, 255, 255, 0.5);
     display: block;
     margin: 30px auto;
@@ -99,7 +98,6 @@ input:focus::placeholder{
     width: auto;
     height: auto;
     padding: 10px;
-    text-transform: capitalize;
     background: rgb(255, 119, 119);
     border-top: 10px solid rgb(255, 37, 37);
     border-bottom-left-radius: 10px;

@@ -112,3 +112,11 @@ a{
     color: #fbf8f8;
 
 }
+.logout{
+    border-radius: 10px;
+    background-color: rgb(206, 152, 71);
+   padding: 7px;
+    color: rgb(253, 255, 254);
+    font-weight: 400;
+    font-size: medium;
+}
