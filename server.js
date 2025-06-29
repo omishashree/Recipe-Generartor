@@ -6,10 +6,11 @@ const knex = require('knex');
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        password: 'omisha',
-        database: 'logininfo'
+        host: 'dpg-d1gjn4bipnbc73aqilf0-a',
+        user:'recipe_generator_nqnd_user',
+        password: 'sCTQwM9LgUbUCHUShuJipGs4cxjvim50',
+        database: 'recipe_generator_nqnd',
+        ssl:{rejectUnauthorized:false}
     }
 })
 
