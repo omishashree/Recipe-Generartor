@@ -16,12 +16,20 @@ const db = knex({
 const app = express();
 
 let initialPath = path.join(__dirname, "public");
+let initialPath1 = path.join(__dirname, "recipe-api");
 
 app.use(bodyParser.json());
 app.use(express.static(initialPath));
+app.use(express.static(initialPath1));
+
+
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(initialPath, "index.html"));
+})
+
+app.get('/explore', (req, res) => {
+    res.sendFile(path.join(initialPath1, "index.html"));
 })
 
 app.get('/login', (req, res) => {

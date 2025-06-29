@@ -1,0 +1,244 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    /* background-image: url("food.jpeg"); */
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dark overlay for better readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* Heading Styles */
+h1 {
+    color: white;
+    margin-top: 20px;
+}
+
+
+#searchBox
+{
+    opacity: 0.5;
+    width: 500px;
+    height: 30px;
+    border-radius: 0.95rem;
+    text-align: center;
+}
+#searchBtn
+{
+    position:relative;
+    width:80px;
+    height: 40px;
+    border-radius:0.95rem;
+    border-color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+#searchBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    transition: width 0.4s ease-in-out;
+    background-color: white;
+    color: #f3f3f3;
+    border-radius: 0.95rem;
+    z-index: -1;
+  }
+  
+ #searchBtn:hover {
+    color: black;
+  }
+  
+ #searchBtn:hover::before {
+    width: 100%;
+  }
+  
+/* View Wishlist Button */
+#viewWishlist {
+    margin-top: 10px;
+    width: 120px;
+    height: 40px;
+    border-radius: 0.95rem;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#viewWishlist:hover {
+    background: #218838;
+}
+
+/* Recipes Container */
+#recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Recipe Card */
+.recipe-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 220px;
+    backdrop-filter: blur(5px);
+}
+
+.recipe-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.recipe-card img:hover {
+    transform: scale(1.1);
+}
+
+/* Recipe Content */
+.recipe-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.recipe-content h3 {
+    flex: 1;
+    word-wrap: break-word;
+    color: white;
+}
+
+/* Wishlist Button */
+.wishlist-btn {
+    background: rgb(206,152,71);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.wishlist-btn:hover {
+    background: rgb(134, 82, 3);
+}
+
+/* Change button color when added to wishlist */
+.wishlist-btn.added {
+    background: green;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background: rgb(50, 44, 44);
+    margin-left: 25%;
+    margin-top: 25px;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;
+    text-align: left;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #f3f3f3;
+}
+
+.modal-content h2 {
+    text-align: center;
+}
+
+#closeModal {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Modal Image */
+#modalContent img {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Modal Paragraph */
+#modalContent p {
+    line-height: 1.6;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+/* Wishlist Page */
+#wishlist {
+    background-image: url("food.jpeg");
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+
+/* Remove Button */
+.remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}
+
+/* Back Button */
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}

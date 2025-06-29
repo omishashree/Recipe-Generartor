@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <h1>My Wishlist</h1>
+    <button onclick="location.href='/explore'">Back to Search</button>
+    <div id="wishlist"></div>
+
+    <script>
+        function loadWishlist() {
+            const wishlistDiv = document.getElementById("wishlist");
+            const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+            if (wishlist.length === 0) {
+                wishlistDiv.innerHTML = "<p>No items in wishlist.</p>";
+                return;
+            }
+
+            wishlistDiv.innerHTML = "";
+            wishlist.forEach(item => {
+                const wishlistItem = document.createElement("div");
+                wishlistItem.classList.add("wishlist-item");
+
+                wishlistItem.innerHTML = `
+                    <div class="wishlist-content">
+                        <img src="${item.image}" alt="${item.name}" width="100">
+                        <p>${item.name}</p>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromWishlist('${item.id}')">Remove</button>
+                `;
+
+                wishlistDiv.appendChild(wishlistItem);
+            });
+        }
+
+        function removeFromWishlist(mealId) {
+            let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            wishlist = wishlist.filter(item => item.id !== mealId);
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+            loadWishlist();
+        }
+
+        document.addEventListener("DOMContentLoaded", loadWishlist);
+    </script>
+</body>
+</html>

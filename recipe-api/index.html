@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <h1>Recipe Finder</h1>
+    <input type="text" id="searchBox" placeholder="Enter an ingredient (e.g., Chicken)">
+    <button id="searchBtn">Search</button>
+
+    <!-- Button to open wishlist page -->
+    <button id="viewWishlist" onclick="location.href='wishlist.html'">View Wishlist</button>
+
+    <!-- Recipe Results -->
+    <div id="recipes"></div>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
