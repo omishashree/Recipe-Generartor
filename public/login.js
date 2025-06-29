@@ -1,29 +1,35 @@
-const form = [...document.querySelector('.form').children];
-
-form.forEach((item, i) => {
-    setTimeout(() => {
-        item.style.opacity = 1;
-    }, i*100);
-})
-
-window.onload = () => {
-    if(sessionStorage.name){
-        location.href = '/';
-    }
+// Animate form appearance
+const formContainer = document.querySelector('.form');
+if (formContainer) {
+    const form = [...formContainer.children];
+    form.forEach((item, i) => {
+        setTimeout(() => {
+            item.style.opacity = 1;
+        }, i * 100);
+    });
 }
 
-// form validation
+// Redirect if already logged in
+window.onload = () => {
+    if (sessionStorage.name) {
+        location.href = '/';
+    }
+};
 
+// Get input fields and button
 const name = document.querySelector('.name') || null;
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
 const submitBtn = document.querySelector('.submit-btn');
 
-if(name == null){ // means login page is open
-    submitBtn.addEventListener('click', () => {
-        fetch('/login-user',{
-            method: 'post',
-            headers: new Headers({'Content-Type': 'application/json'}),
+// Login Page
+if (!name) {
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        fetch('/login-user', {
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
                 email: email.value,
                 password: password.value
@@ -31,22 +37,26 @@ if(name == null){ // means login page is open
         })
         .then(res => res.json())
         .then(data => {
-            if(data.name){
+            if (data.success) {
                 alert('Login Successful');
-                validateData(data);
+                validateData(data.user);
+            } else {
+                alertBox(data.message || 'Login failed');
             }
-            else{
-                alert(data);
-            }
-            
         })
-    })
-} else{ // means register page is open
+        .catch(err => {
+            console.error(err);
+            alertBox('Server error');
+        });
+    });
+} else {
+    // Register Page
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
 
-    submitBtn.addEventListener('click', () => {
         fetch('/register-user', {
-            method: 'post',
-            headers: new Headers({'Content-Type': 'application/json'}),
+            method: 'POST',
+            headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({
                 name: name.value,
                 email: email.value,
@@ -55,35 +65,43 @@ if(name == null){ // means login page is open
         })
         .then(res => res.json())
         .then(data => {
-            if(data.name){
-                alert('Register Successful');
-                validateData(data);
-            }
-            else{
-                alert(data);
+            if (data.success) {
+                alert('Registration Successful');
+                validateData(data.user);
+            } else {
+                alertBox(data.message || 'Registration failed');
             }
         })
-    })
-
+        .catch(err => {
+            console.error(err);
+            alertBox('Server error');
+        });
+    });
 }
 
+// Redirect and save session info
 const validateData = (data) => {
-    if(!data.name){
-        alertBox(data);
-    } else{
+    if (!data.name || !data.email) {
+        alertBox('Invalid user data received');
+    } else {
         sessionStorage.name = data.name;
         sessionStorage.email = data.email;
         location.href = '/';
     }
-}
+};
 
-const alertBox = (data) => {
+// Show message on the page instead of alert()
+const alertBox = (message) => {
     const alertContainer = document.querySelector('.alert-box');
     const alertMsg = document.querySelector('.alert');
-    alertMsg.innerHTML = data;
 
-    alertContainer.style.top = `5%`;
-    setTimeout(() => {
-        alertContainer.style.top = null;
-    }, 5000);
-}
+    if (alertContainer && alertMsg) {
+        alertMsg.innerText = message;
+        alertContainer.style.top = `5%`;
+        setTimeout(() => {
+            alertContainer.style.top = null;
+        }, 5000);
+    } else {
+        alert(message); // Fallback if alert-box isn't in the DOM
+    }
+};
